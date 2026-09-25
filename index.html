@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#f3f0e8">
+<title>ART. — Telegram Mini App</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#f3f0e8;--ink:#101010;--muted:#77736a;--acid:#d8ff32;--pink:#ff4f9a;--blue:#5965ff;--white:#fffdf8;--line:#171717}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}body{overscroll-behavior:none}.app{max-width:620px;margin:auto;padding:14px 16px calc(92px + env(safe-area-inset-bottom))}
+button{font:inherit;border:0}.top{display:flex;align-items:center;justify-content:space-between;padding:3px 0 10px}.logo{font-size:29px;font-weight:950;letter-spacing:-2px}.xp{font-size:13px;font-weight:900;background:var(--acid);border:2px solid var(--line);border-radius:99px;padding:8px 11px}.page{display:none}.page.active{display:block}.hero{background:var(--ink);color:#fff;border-radius:28px;padding:24px;min-height:370px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:var(--pink);right:-80px;top:-75px}.hero:after{content:"ART";position:absolute;right:-4px;bottom:-40px;font-size:145px;font-weight:950;letter-spacing:-14px;color:#fff;opacity:.08}.kicker{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;font-weight:900;color:var(--muted)}.hero .kicker{color:#aaa}.hero h1{font-size:49px;line-height:.88;letter-spacing:-4px;margin:18px 0;position:relative;z-index:1}.hero p{color:#c9c9c9;line-height:1.5;max-width:420px;position:relative;z-index:1}.primary{background:var(--acid);padding:14px 17px;border-radius:14px;font-weight:950;margin-top:8px;position:relative;z-index:1}.section{margin-top:28px}.section h2{font-size:23px;letter-spacing:-1.1px;margin:0 0 12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--white);border:2px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:3px 3px 0 var(--line)}.card:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}.art{height:145px;background-size:cover;background-position:center}.cardbody{padding:12px}.card h3{margin:5px 0 3px;font-size:17px;line-height:1.05;letter-spacing:-.5px}.card p{margin:0;color:var(--muted);font-size:12px;line-height:1.35}.tag{font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:950;color:var(--muted)}.nav{position:fixed;z-index:20;left:0;right:0;bottom:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(243,240,232,.93);backdrop-filter:blur(18px);border-top:1px solid #d0ccc2}.navin{max-width:620px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{background:none;color:#817d74;font-size:11px;font-weight:850;padding:5px}.nav button.active{color:var(--ink)}.nav .ico{font-size:20px;line-height:18px}.back{background:none;font-weight:950;padding:7px 0}.lessonImg{width:100%;height:330px;object-fit:cover;border:2px solid var(--line);border-radius:24px;margin:8px 0 15px}.lesson h1{font-size:39px;line-height:.93;letter-spacing:-2.8px;margin:8px 0}.lessonText{font-size:17px;line-height:1.55}.quiz{background:var(--ink);color:#fff;border-radius:24px;padding:19px;margin-top:18px}.quiz h2{font-size:23px;line-height:1.05}.answers{display:grid;gap:9px}.answer{background:#fff;color:#111;border-radius:13px;padding:13px;text-align:left;font-weight:850}.answer.correct{background:var(--acid)}.answer.wrong{background:#ff9090}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{background:var(--white);border:2px solid var(--line);border-radius:20px;padding:17px}.stat b{font-size:35px;letter-spacing:-2px}.progress{height:9px;background:#d8d5cd;border-radius:99px;overflow:hidden;margin-top:9px}.bar{height:100%;width:0;background:var(--ink);transition:.4s}.big{font-size:55px;font-weight:950;line-height:.88;letter-spacing:-5px}.filter{display:flex;gap:7px;overflow:auto;padding:2px 0 10px}.filter button{white-space:nowrap;border:1.5px solid var(--line);border-radius:99px;padding:8px 11px;background:transparent;font-size:12px;font-weight:850}.filter button.on{background:var(--ink);color:#fff}.toast{position:fixed;top:calc(12px + env(safe-area-inset-top));left:50%;z-index:50;transform:translate(-50%,-130%);background:var(--ink);color:#fff;border-radius:99px;padding:11px 17px;font-weight:900;transition:.25s}.toast.show{transform:translate(-50%,0)}.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:flex-end}.modal.open{display:flex}.sheet{background:var(--bg);width:100%;border-radius:26px 26px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}.close{float:right;background:#111;color:#fff;border-radius:99px;width:34px;height:34px}.small{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<main class="app">
+<header class="top"><div class="logo">ART.</div><div class="xp" id="xp">0 XP</div></header>
+
+<section id="home" class="page active">
+<div class="hero"><div class="kicker">Интерактивное искусство</div><h1>Смотри.<br>Замечай.<br>Понимай.</h1><p>От пещерных рисунков до digital art. Короткие уроки, визуальные задания и открытия на каждый день.</p><button class="primary" onclick="openLesson(0)">Начать путь →</button></div>
+<div class="section"><h2>Сегодня</h2><div class="card" onclick="openLesson(0)"><div class="art" style="background-image:url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1000&q=85')"></div><div class="cardbody"><div class="tag">5 минут · визуальный язык</div><h3>Как смотреть на картину</h3><p>Три наблюдения, которые меняют восприятие.</p></div></div></div>
+<div class="section"><h2>Путешествие</h2><div class="grid" id="homeGrid"></div></div>
+</section>
+
+<section id="explore" class="page">
+<div class="section" style="margin-top:4px"><div class="kicker">Исследование</div><div class="big">ART<br>MAP.</div><p>Выбирай эпоху, дисциплину или художника.</p>
+<div class="filter"><button class="on" onclick="filterCards('all',this)">Все</button><button onclick="filterCards('painting',this)">Живопись</button><button onclick="filterCards('architecture',this)">Архитектура</button><button onclick="filterCards('sculpture',this)">Скульптура</button><button onclick="filterCards('photo',this)">Фото</button></div>
+<div class="grid" id="exploreGrid"></div></div>
+</section>
+
+<section id="random" class="page">
+<div class="hero" style="min-height:330px"><div class="kicker">Случайное искусство</div><h1 id="rndTitle">Удиви меня.</h1><p id="rndText">Нажми кнопку — и отправляйся в неожиданную точку истории искусства.</p><button class="primary" onclick="randomArt()">🎲 Новое открытие</button></div>
+<div class="section" id="rndCard"></div>
+</section>
+
+<section id="profile" class="page">
+<div class="section" style="margin-top:4px"><div class="kicker">Твой профиль</div><div class="big">LEVEL <span id="level">1</span></div><p><b id="totalxp">0</b> XP · серия <b id="streak">1</b> день</p><div class="progress"><div class="bar" id="bar"></div></div>
+<div class="section stats"><div class="stat"><div class="small">Открыто</div><b id="opened">0</b><div class="small">уроков</div></div><div class="stat"><div class="small">Коллекция</div><b id="collect">0</b><div class="small">объектов</div></div></div>
+<div class="section"><h2>Твоя коллекция</h2><div class="grid" id="collection"></div></div></div>
+</section>
+
+<section id="lesson" class="page lesson"><button class="back" onclick="showPage('home')">← Назад</button><div id="lessonContent"></div></section>
+</main>
+
+<nav class="nav"><div class="navin">
+<button class="active" onclick="showPage('home',this)"><div class="ico">⌂</div>Главная</button>
+<button onclick="showPage('explore',this)"><div class="ico">◫</div>Исследовать</button>
+<button onclick="showPage('random',this)"><div class="ico">✦</div>Случайное</button>
+<button onclick="showPage('profile',this)"><div class="ico">○</div>Профиль</button>
+</div></nav>
+
+<div class="modal" id="modal"><div class="sheet"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+
+<script>
+const tg=window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand();try{tg.setHeaderColor('#f3f0e8');tg.setBackgroundColor('#f3f0e8')}catch(e){}}
+
+const img=[
+'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1000&q=85',
+'https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1000&q=85',
+'https://images.unsplash.com/photo-1577083288073-40892c0860a4?auto=format&fit=crop&w=1000&q=85',
+'https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1000&q=85',
+'https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=1000&q=85'
+];
+const works=[
+{id:1,title:'Пещерное искусство',meta:'~40 000 до н.э. · живопись',type:'painting',image:img[0],text:'Первые изображения связывают наблюдение за миром, ритуал и желание оставить след. Здесь начинается история визуального мышления.'},
+{id:2,title:'Древний Египет',meta:'3000–30 до н.э. · архитектура',type:'architecture',image:img[1],text:'Искусство Египта строилось вокруг символа, порядка и представления о вечности.'},
+{id:3,title:'Античность',meta:'VIII в. до н.э.–V в. · скульптура',type:'sculpture',image:img[2],text:'Греческая и римская традиция сформировала мощную систему представлений о теле, пропорции и идеализированной форме.'},
+{id:4,title:'Возрождение',meta:'XIV–XVI века · живопись',type:'painting',image:img[3],text:'Художники Возрождения исследовали перспективу, анатомию, свет и отношения человека с пространством.'},
+{id:5,title:'Барокко',meta:'XVII век · живопись',type:'painting',image:img[4],text:'Драма, движение, контраст света и тени. Изображение становится театром.'},
+{id:6,title:'Импрессионизм',meta:'XIX век · живопись',type:'painting',image:img[2],text:'Момент, свет и впечатление становятся важнее академической гладкости.'},
+{id:7,title:'Фотография',meta:'XIX–XX века · фото',type:'photo',image:img[1],text:'Камера меняет саму идею изображения: реальность можно фиксировать мгновенно и массово.'},
+{id:8,title:'Современное искусство',meta:'XX–XXI века · смешанные практики',type:'photo',image:img[0],text:'Искусством становится не только объект. Важными становятся идея, контекст, действие и участие зрителя.'}
+];
+const lessons=[
+{title:'Как научиться смотреть на картину',epoch:'Визуальный язык',image:img[3],text:'Не начинай с вопроса «что это значит?». Сначала посмотри, как работа устроена: где свет, куда ведут линии, что находится в центре внимания и что художник оставил за пределами кадра.',q:'Что стоит сделать первым?',a:['Узнать цену картины','Посмотреть, как она устроена','Найти биографию художника','Прочитать все подписи'],correct:1},
+{title:'Почему перспектива изменила живопись',epoch:'Возрождение',image:img[3],text:'Линейная перспектива позволила художникам строить убедительное пространство на плоскости. Точка схода и сходящиеся линии создают ощущение глубины.',q:'Что создаёт ощущение глубины?',a:['Только яркие цвета','Случайные мазки','Сходящиеся линии и точка схода','Большой размер холста'],correct:2},
+{title:'Когда свет становится главным героем',epoch:'Барокко',image:img[4],text:'В барочной живописи свет может направлять взгляд почти как режиссёр. Сильный контраст помогает выделить жест, лицо или действие.',q:'Какой приём особенно характерен?',a:['Случайная композиция','Светотеневой контраст','Отсутствие фигур','Только пастельные цвета'],correct:1}
+];
+let state=JSON.parse(localStorage.getItem('art_state')||'{"xp":0,"opened":0,"collection":[],"streak":1}');
+function save(){localStorage.setItem('art_state',JSON.stringify(state));renderStats()}
+function renderStats(){document.getElementById('xp').textContent=state.xp+' XP';document.getElementById('totalxp').textContent=state.xp;document.getElementById('opened').textContent=state.opened;document.getElementById('collect').textContent=state.collection.length;document.getElementById('level').textContent=Math.floor(state.xp/100)+1;document.getElementById('streak').textContent=state.streak;document.getElementById('bar').style.width=(state.xp%100)+'%'}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');window.scrollTo(0,0)}
+function card(w,click=true){return `<div class="card" ${click?`onclick="openWork(${w.id})"`:''}><div class="art" style="background-image:url('${w.image}')"></div><div class="cardbody"><div class="tag">${w.meta}</div><h3>${w.title}</h3><p>${click?'Открыть →':'Изучено'}</p></div></div>`}
+function renderHome(){document.getElementById('homeGrid').innerHTML=works.slice(0,4).map(w=>card(w)).join('')}
+function renderExplore(list=works){document.getElementById('exploreGrid').innerHTML=list.map(w=>card(w)).join('')}
+function filterCards(type,btn){document.querySelectorAll('.filter button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');renderExplore(type==='all'?works:works.filter(w=>w.type===type))}
+function renderCollection(){let c=works.filter(w=>state.collection.includes(w.id));document.getElementById('collection').innerHTML=(c.length?c:works.slice(0,2)).map(w=>card(w,false)).join('')}
+function openWork(id){let w=works.find(x=>x.id===id);document.getElementById('modalContent').innerHTML=`<div class="kicker">${w.meta}</div><h1 style="font-size:39px;line-height:.94;letter-spacing:-2px">${w.title}</h1><img class="lessonImg" src="${w.image}"><p class="lessonText">${w.text}</p><button class="primary" onclick="addCollection(${w.id})">＋ Добавить в коллекцию</button>`;document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function addCollection(id){if(!state.collection.includes(id)){state.collection.push(id);state.xp+=15;save();toast('+15 XP · добавлено в коллекцию')}else toast('Уже в коллекции');}
+function openLesson(i){let l=lessons[i%lessons.length];document.getElementById('lessonContent').innerHTML=`<div class="kicker">${l.epoch}</div><h1>${l.title}</h1><img class="lessonImg" src="${l.image}"><p class="lessonText">${l.text}</p><div class="quiz"><div class="kicker" style="color:#aaa">Мини-тест · +50 XP</div><h2>${l.q}</h2><div class="answers">${l.a.map((a,n)=>`<button class="answer" onclick="answer(this,${n},${l.correct})">${a}</button>`).join('')}</div><p id="result"></p></div>`;showPage('lesson')}
+function answer(btn,n,c){document.querySelectorAll('.answer').forEach(x=>x.disabled=true);if(n===c){btn.classList.add('correct');state.xp+=50;state.opened++;save();document.getElementById('result').textContent='Верно. Ты заметил главное. +50 XP';toast('✨ +50 XP')}else{btn.classList.add('wrong');document.getElementById('result').textContent='Не совсем. Попробуй ещё раз в следующем уроке.'}}
+const randoms=[['Хокусай','Большая волна в Канагаве','Япония · укиё-э · XIX век',img[2]],['Караваджо','Свет как драматург','Италия · барокко · XVII век',img[4]],['Пикассо','Когда предмет распадается на формы','Европа · модернизм · XX век',img[3]],['Современное искусство','Когда идея важнее объекта','XX–XXI век · концептуальные практики',img[0]]];
+function randomArt(){let r=randoms[Math.floor(Math.random()*randoms.length)];document.getElementById('rndTitle').textContent=r[0];document.getElementById('rndText').textContent=r[1]+' — '+r[2];document.getElementById('rndCard').innerHTML=`<div class="card" onclick="toast('Открывай следующий урок ✦')"><div class="art" style="height:310px;background-image:url('${r[3]}')"></div><div class="cardbody"><div class="tag">Новое открытие</div><h3>${r[1]}</h3><p>${r[2]}</p></div></div>`;state.xp+=10;save();toast('+10 XP за исследование')}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1600)}
+renderHome();renderExplore();renderCollection();renderStats();
+</script>
+</body>
+</html>
